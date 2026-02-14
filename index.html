@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Te amo Leticia ❤️ | 14 de Febrero</title>
+
+<style>
+    body{
+        margin:0;
+        padding:0;
+        height:100vh;
+        background: radial-gradient(circle at top, #ff8fb1, #ff4d6d, #c9184a);
+        overflow:hidden;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        font-family: 'Segoe UI', cursive;
+        color:white;
+        text-align:center;
+    }
+
+    h1{
+        font-size:3em;
+        text-shadow:0 0 20px rgba(255,255,255,0.8);
+        animation: latido 1.5s infinite;
+    }
+
+    @keyframes latido{
+        0%{transform:scale(1);}
+        50%{transform:scale(1.1);}
+        100%{transform:scale(1);}
+    }
+
+    p{
+        max-width:600px;
+        font-size:1.2em;
+        margin:20px;
+        line-height:1.6em;
+    }
+
+    button{
+        padding:15px 30px;
+        font-size:1.2em;
+        border:none;
+        border-radius:30px;
+        background:white;
+        color:#c9184a;
+        cursor:pointer;
+        transition:0.3s;
+        box-shadow:0 0 15px rgba(255,255,255,0.6);
+    }
+
+    button:hover{
+        background:#ffe0e9;
+        transform:scale(1.1);
+    }
+
+    .heart{
+        position:absolute;
+        color:#ffccd5;
+        font-size:20px;
+        animation:float 5s linear forwards;
+    }
+
+    @keyframes float{
+        0%{
+            transform:translateY(0) scale(1);
+            opacity:1;
+        }
+        100%{
+            transform:translateY(-800px) scale(2);
+            opacity:0;
+        }
+    }
+
+    footer{
+        position:absolute;
+        bottom:10px;
+        font-size:0.8em;
+        opacity:0.8;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>💖 Feliz 14 de Febrero 💖</h1>
+
+<p>
+Hoy, en este día tan especial, quiero que el universo entero sepa que mi corazón tiene tu nombre grabado.
+Cada mensaje tuyo ilumina mi día, cada palabra tuya me hace sonreír…
+Leticia, tú eres mi casualidad más hermosa. 🌹✨
+</p>
+
+<button onclick="crearCorazones()">Te amo Leticia :)</button>
+
+<footer>
+Hecho con amor infinito 💕 | 14 de Febrero
+</footer>
+
+<script>
+function crearCorazones(){
+    for(let i=0;i<30;i++){
+        let heart=document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML="❤️";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.fontSize=(Math.random()*30+10)+"px";
+        document.body.appendChild(heart);
+
+        setTimeout(()=>{
+            heart.remove();
+        },5000);
+    }
+}
+</script>
+
+</body>
+</html>
