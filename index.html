@@ -3,116 +3,215 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Te amo Leticia ❤️ | 14 de Febrero</title>
+<title>Te amo Leticia ❤️</title>
 
 <style>
-    body{
-        margin:0;
-        padding:0;
-        height:100vh;
-        background: radial-gradient(circle at top, #ff8fb1, #ff4d6d, #c9184a);
-        overflow:hidden;
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
-        font-family: 'Segoe UI', cursive;
-        color:white;
-        text-align:center;
-    }
+body{
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    height:100vh;
+    background: radial-gradient(circle at top, #ff8fab, #ff4d6d, #c9184a);
+    font-family:'Segoe UI', cursive;
+    color:white;
+    text-align:center;
+}
 
-    h1{
-        font-size:3em;
-        text-shadow:0 0 20px rgba(255,255,255,0.8);
-        animation: latido 1.5s infinite;
-    }
+/* ✨ Estrellas románticas */
+.stars{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:
+      radial-gradient(2px 2px at 20% 30%, white, transparent),
+      radial-gradient(2px 2px at 70% 60%, white, transparent),
+      radial-gradient(2px 2px at 40% 80%, white, transparent),
+      radial-gradient(2px 2px at 90% 20%, white, transparent),
+      radial-gradient(2px 2px at 10% 70%, white, transparent);
+    animation: twinkle 4s infinite alternate;
+    z-index:-1;
+}
 
-    @keyframes latido{
-        0%{transform:scale(1);}
-        50%{transform:scale(1.1);}
-        100%{transform:scale(1);}
-    }
+@keyframes twinkle{
+    from{opacity:0.3;}
+    to{opacity:1;}
+}
 
-    p{
-        max-width:600px;
-        font-size:1.2em;
-        margin:20px;
-        line-height:1.6em;
-    }
+h1{
+    margin-top:40px;
+    font-size:2.8em;
+    text-shadow:0 0 20px rgba(255,255,255,0.8);
+    animation: latido 1.5s infinite;
+}
 
-    button{
-        padding:15px 30px;
-        font-size:1.2em;
-        border:none;
-        border-radius:30px;
-        background:white;
-        color:#c9184a;
-        cursor:pointer;
-        transition:0.3s;
-        box-shadow:0 0 15px rgba(255,255,255,0.6);
-    }
+@keyframes latido{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.05);}
+    100%{transform:scale(1);}
+}
 
-    button:hover{
-        background:#ffe0e9;
-        transform:scale(1.1);
-    }
+/* 💌 Carta */
+.envelope{
+    position:absolute;
+    width:320px;
+    height:220px;
+    background:#ffccd5;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    border-radius:15px;
+    cursor:pointer;
+    box-shadow:0 0 25px rgba(255,255,255,0.6);
+    transition:0.4s;
+}
 
-    .heart{
-        position:absolute;
-        color:#ffccd5;
-        font-size:20px;
-        animation:float 5s linear forwards;
-    }
+.envelope:hover{
+    transform:translate(-50%, -50%) scale(1.05);
+}
 
-    @keyframes float{
-        0%{
-            transform:translateY(0) scale(1);
-            opacity:1;
-        }
-        100%{
-            transform:translateY(-800px) scale(2);
-            opacity:0;
-        }
-    }
+.envelope{
+    position:absolute;
+    width:350px;
+    background:#ffccd5;
+    padding:20px;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    border-radius:20px;
+    cursor:pointer;
+    box-shadow:0 0 30px rgba(255,255,255,0.6);
+    transition:0.4s;
+}
 
-    footer{
-        position:absolute;
-        bottom:10px;
-        font-size:0.8em;
-        opacity:0.8;
-    }
+.envelope:hover{
+    transform:translate(-50%, -50%) scale(1.05);
+}
+
+.letter{
+    background:white;
+    color:#c9184a;
+    padding:20px;
+    border-radius:15px;
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.8s ease;
+}
+
+.envelope.open .letter{
+    max-height:500px;
+}
+
+
+/* 💖 Botón */
+button{
+    position:absolute;
+    bottom:40px;
+    left:50%;
+    transform:translateX(-50%);
+    padding:15px 35px;
+    font-size:18px;
+    border:none;
+    border-radius:40px;
+    background:white;
+    color:#c9184a;
+    cursor:pointer;
+    box-shadow:0 0 20px rgba(255,255,255,0.8);
+    transition:0.3s;
+}
+
+button:hover{
+    transform:translateX(-50%) scale(1.1);
+}
+
+/* ❤️ Corazones y mensajes */
+.float{
+    position:absolute;
+    animation: subir 6s linear forwards;
+    white-space:nowrap;
+    pointer-events:none;
+}
+
+@keyframes subir{
+    0%{transform:translateY(0); opacity:1;}
+    100%{transform:translateY(-800px); opacity:0;}
+}
+
+footer{
+    position:absolute;
+    bottom:5px;
+    width:100%;
+    font-size:0.8em;
+    opacity:0.8;
+}
 </style>
 </head>
 
 <body>
 
+<div class="stars"></div>
+
 <h1>💖 Feliz 14 de Febrero 💖</h1>
 
-<p>
-Hoy, en este día tan especial, quiero que el universo entero sepa que mi corazón tiene tu nombre grabado.
-Cada mensaje tuyo ilumina mi día, cada palabra tuya me hace sonreír…
-Leticia, tú eres mi casualidad más hermosa. 🌹✨
-</p>
+<div class="envelope" onclick="abrirCarta(this)">
+    <div class="letter">
+        <h3>Para Leticia 💕</h3>
+        <p>
+        Desde que llegaste a mi vida, todo es más bonito.<br><br>
+        Tus mensajes iluminan mis días ✨<br>
+        Tu sonrisa acelera mi corazón 💓<br>
+        Y tu existencia es mi regalo favorito 🎁<br><br>
+        Hoy celebro el amor…  
+        pero sobre todo celebro que seas tú ❤️
+        </p>
+    </div>
+</div>
 
-<button onclick="crearCorazones()">Te amo Leticia :)</button>
+<button onclick="efectoAmor()">Te amo Leticia :)</button>
 
 <footer>
-Hecho con amor infinito 💕 | 14 de Febrero
+Hecho con amor infinito 💘 | 14 de Febrero
 </footer>
 
 <script>
-function crearCorazones(){
+function abrirCarta(el){
+    el.classList.toggle("open");
+}
+
+const mensajes = [
+"Mi niña hermosa 💕",
+"Eres mi persona favorita 🥰",
+"Mi casualidad perfecta ✨",
+"Contigo todo es mágico 💖",
+"Mi paz ❤️",
+"Siempre tú 💘",
+"Mi sonrisa eterna 😍",
+"Eres mi sueño hecho realidad 🌹",
+"Mi todo 💞",
+"Te elegiría mil veces 💫"
+];
+
+function efectoAmor(){
     for(let i=0;i<30;i++){
+
+        // Corazón
         let heart=document.createElement("div");
-        heart.classList.add("heart");
+        heart.classList.add("float");
         heart.innerHTML="❤️";
         heart.style.left=Math.random()*100+"vw";
-        heart.style.fontSize=(Math.random()*30+10)+"px";
+        heart.style.fontSize=(Math.random()*25+20)+"px";
         document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),6000);
 
-        setTimeout(()=>{
-            heart.remove();
-        },5000);
+        // Mensaje
+        let msg=document.createElement("div");
+        msg.classList.add("float");
+        msg.innerHTML=mensajes[Math.floor(Math.random()*mensajes.length)];
+        msg.style.left=Math.random()*100+"vw";
+        msg.style.top=(Math.random()*80+10)+"vh";
+        msg.style.fontSize="18px";
+        msg.style.color="#ffe5ec";
+        document.body.appendChild(msg);
+        setTimeout(()=>msg.remove(),6000);
     }
 }
 </script>
