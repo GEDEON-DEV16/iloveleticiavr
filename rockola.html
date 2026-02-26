@@ -23,6 +23,28 @@
             overflow: hidden;
         }
 
+        /* AVISO DE AUDIO */
+        #audio-hint {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 117, 143, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            z-index: 1000;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            animation: bounce 2s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, -10px); }
+        }
+
         /* FONDO ANIMADO DE CORAZONES */
         .hearts-bg {
             position: fixed;
@@ -43,7 +65,6 @@
             100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
-        /* CONTENEDOR PRINCIPAL */
         .main-card {
             width: 95%;
             max-width: 950px;
@@ -57,22 +78,13 @@
             box-shadow: 0 0 50px rgba(255, 77, 109, 0.3);
         }
 
-        .header {
-            padding: 20px;
-            text-align: center;
-            background: rgba(255, 117, 143, 0.1);
-        }
-
+        .header { padding: 20px; text-align: center; background: rgba(255, 117, 143, 0.1); }
         .header h1 { margin: 0; font-size: 1.5rem; color: var(--soft-pink); text-shadow: 0 0 10px var(--romance); }
-
         .content { display: flex; flex: 1; }
-
-        /* VIDEO */
         .video-side { flex: 1.5; position: relative; background: #000; }
         .video-wrapper { position: relative; padding-top: 56.25%; }
         iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-        /* FRASES ROMÁNTICAS */
         #love-quote {
             padding: 15px;
             text-align: center;
@@ -82,7 +94,6 @@
             min-height: 20px;
         }
 
-        /* PLAYLIST */
         .playlist-side {
             flex: 1;
             background: rgba(0,0,0,0.4);
@@ -105,12 +116,8 @@
         }
 
         .song-card:hover { background: rgba(255, 117, 143, 0.2); }
-        .song-card.active {
-            background: var(--romance);
-            box-shadow: 0 0 20px rgba(255, 117, 143, 0.5);
-        }
+        .song-card.active { background: var(--romance); box-shadow: 0 0 20px rgba(255, 117, 143, 0.5); }
 
-        /* BOTONES */
         .player-controls {
             display: flex;
             justify-content: center;
@@ -134,8 +141,9 @@
         }
     </style>
 </head>
-<body>
+<body onclick="unmuteVideo()">
 
+<div id="audio-hint">Toca cualquier parte para escuchar 🔊</div>
 <div class="hearts-bg" id="hearts-container"></div>
 
 <div class="main-card">
@@ -180,22 +188,19 @@
     const songs = document.querySelectorAll('.song-card');
     const quoteBox = document.getElementById('love-quote');
     const playPauseBtn = document.getElementById('playPauseBtn');
+    const hint = document.getElementById('audio-hint');
     let current = 0;
     let isPaused = false;
 
-    const quotes = [
-        "Este es solo el primer mes de muchos... 🌹",
-        "Cada canción me recuerda a una sonrisa tuya. 😊",
-        "Gracias por este mes tan increíble a tu lado. ❤️",
-        "Tú eres mi melodía favorita. 🎶",
-        "Un mes juntos y ya siento que te conozco de siempre. ✨",
-        "Eres el mejor regalo que me dio la vida. 🎁",
-        "Me encantas cada día un poquito más. 😍",
-        "Por un millón de meses más contigo. 🥂",
-        "Nuestra historia apenas comienza... 📖"
-    ];
+    // Esta función quita el mute de YouTube cuando el usuario toca la pantalla
+    function unmuteVideo() {
+        player.contentWindow.postMessage('{"event":"command","func":"unMute","args":""}', '*');
+        player.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+        hint.style.display = 'none'; // Esconde el aviso
+    }
 
     function togglePlay() {
+        unmuteVideo(); // Aseguramos que se quite el mute al usar el botón
         if (!isPaused) {
             player.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
             playPauseBtn.innerHTML = "▶";
@@ -212,11 +217,11 @@
         const auto = autoplay ? 1 : 0;
         const origin = window.location.origin;
         
-        // Mantenemos el mute=1 para evitar bloqueos en Chrome al cambiar de canción
         player.src = `https://www.youtube.com/embed/${id}?autoplay=${auto}&mute=1&controls=0&rel=0&enablejsapi=1&origin=${origin}`;
         
         playPauseBtn.innerHTML = "⏸";
         isPaused = false;
+        hint.style.display = 'block'; // Volver a mostrar si cambia de canción
 
         songs.forEach((s, i) => s.classList.toggle('active', i === current));
         quoteBox.textContent = quotes[current % quotes.length];
