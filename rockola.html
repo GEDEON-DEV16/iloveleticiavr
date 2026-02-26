@@ -147,7 +147,7 @@
         <div class="video-side">
             <div class="video-wrapper">
                 <iframe id="videoPlayer" 
-                    src="https://www.youtube-nocookie.com/embed/dmk38LOfLbI?autoplay=1&controls=0&rel=0&enablejsapi=1" 
+                    src="https://www.youtube.com/embed/dmk38LOfLbI?autoplay=1&mute=1&controls=0&rel=0&enablejsapi=1" 
                     allow="autoplay; encrypted-media" 
                     allowfullscreen>
                 </iframe>
@@ -195,7 +195,6 @@
         "Nuestra historia apenas comienza... 📖"
     ];
 
-    // Función para pausar/reproducir enviando comandos al iframe
     function togglePlay() {
         if (!isPaused) {
             player.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
@@ -213,9 +212,9 @@
         const auto = autoplay ? 1 : 0;
         const origin = window.location.origin;
         
-        player.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=${auto}&controls=0&rel=0&enablejsapi=1&origin=${origin}`;
+        // Mantenemos el mute=1 para evitar bloqueos en Chrome al cambiar de canción
+        player.src = `https://www.youtube.com/embed/${id}?autoplay=${auto}&mute=1&controls=0&rel=0&enablejsapi=1&origin=${origin}`;
         
-        // Al cambiar de canción, reseteamos el botón a PAUSE
         playPauseBtn.innerHTML = "⏸";
         isPaused = false;
 
