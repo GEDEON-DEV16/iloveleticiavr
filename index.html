@@ -17,7 +17,7 @@ body{
     text-align:center;
 }
 
-/* ✨ Estrellas románticas */
+/* ✨ Estrellas */
 .stars{
     position:absolute;
     width:100%;
@@ -53,24 +53,6 @@ h1{
 /* 💌 Carta */
 .envelope{
     position:absolute;
-    width:320px;
-    height:220px;
-    background:#ffccd5;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
-    border-radius:15px;
-    cursor:pointer;
-    box-shadow:0 0 25px rgba(255,255,255,0.6);
-    transition:0.4s;
-}
-
-.envelope:hover{
-    transform:translate(-50%, -50%) scale(1.05);
-}
-
-.envelope{
-    position:absolute;
     width:350px;
     background:#ffccd5;
     padding:20px;
@@ -81,6 +63,15 @@ h1{
     cursor:pointer;
     box-shadow:0 0 30px rgba(255,255,255,0.6);
     transition:0.4s;
+    animation:giro360 60s infinite;
+}
+
+@keyframes giro360{
+    0%{ transform:translate(-50%, -50%) rotateY(0deg); }
+    25%{ transform:translate(-50%, -50%) rotateY(360deg); }
+    50%{ transform:translate(-50%, -50%) rotateY(360deg); }
+    75%{ transform:translate(-50%, -50%) rotateY(720deg); }
+    100%{ transform:translate(-50%, -50%) rotateY(720deg); }
 }
 
 .envelope:hover{
@@ -100,7 +91,6 @@ h1{
 .envelope.open .letter{
     max-height:500px;
 }
-
 
 /* 💖 Botón */
 button{
@@ -123,7 +113,7 @@ button:hover{
     transform:translateX(-50%) scale(1.1);
 }
 
-/* ❤️ Corazones y mensajes */
+/* ❤️ Corazones flotantes */
 .float{
     position:absolute;
     animation: subir 6s linear forwards;
@@ -134,6 +124,27 @@ button:hover{
 @keyframes subir{
     0%{transform:translateY(0); opacity:1;}
     100%{transform:translateY(-800px); opacity:0;}
+}
+
+/* 📦 Timeline desbloqueable */
+.timeline-box{
+    position:absolute;
+    bottom:120px;
+    left:50%;
+    transform:translateX(-50%);
+    width:80%;
+    max-width:600px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(8px);
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0 0 25px rgba(255,255,255,0.4);
+    max-height:150px;
+    overflow-y:auto;
+}
+
+.timeline-box h3{
+    margin-top:0;
 }
 
 footer{
@@ -166,10 +177,15 @@ footer{
     </div>
 </div>
 
+<div class="timeline-box">
+    <h3>📅 Nuestro Tiempo Juntos</h3>
+    <div id="timeline"></div>
+</div>
+
 <button onclick="efectoAmor()">Te amo Leticia :)</button>
 
 <footer>
-Hecho con amor infinito 💘 | 14 de Febrero
+Hecho con amor infinito 💘
 </footer>
 
 <script>
@@ -177,23 +193,13 @@ function abrirCarta(el){
     el.classList.toggle("open");
 }
 
-const mensajes = [
-"Mi niña hermosa 💕",
-"Eres mi persona favorita 🥰",
-"Mi casualidad perfecta ✨",
-"Contigo todo es mágico 💖",
-"Mi paz ❤️",
-"Siempre tú 💘",
-"Mi sonrisa eterna 😍",
-"Eres mi sueño hecho realidad 🌹",
-"Mi todo 💞",
-"Te elegiría mil veces 💫"
+const mensajes=[
+"Mi niña hermosa 💕","Eres mi persona favorita 🥰","Mi paz ❤️",
+"Siempre tú 💘","Te elegiría mil veces 💫"
 ];
 
 function efectoAmor(){
-    for(let i=0;i<30;i++){
-
-        // Corazón
+    for(let i=0;i<20;i++){
         let heart=document.createElement("div");
         heart.classList.add("float");
         heart.innerHTML="❤️";
@@ -201,18 +207,34 @@ function efectoAmor(){
         heart.style.fontSize=(Math.random()*25+20)+"px";
         document.body.appendChild(heart);
         setTimeout(()=>heart.remove(),6000);
-
-        // Mensaje
-        let msg=document.createElement("div");
-        msg.classList.add("float");
-        msg.innerHTML=mensajes[Math.floor(Math.random()*mensajes.length)];
-        msg.style.left=Math.random()*100+"vw";
-        msg.style.top=(Math.random()*80+10)+"vh";
-        msg.style.fontSize="18px";
-        msg.style.color="#ffe5ec";
-        document.body.appendChild(msg);
-        setTimeout(()=>msg.remove(),6000);
     }
+}
+
+/* 🔥 DESBLOQUEO AUTOMÁTICO POR MESES */
+const fechaInicio = new Date("2026-01-26"); // CAMBIA ESTA FECHA
+const hoy = new Date();
+const timeline = document.getElementById("timeline");
+
+let meses = (hoy.getFullYear() - fechaInicio.getFullYear()) * 12;
+meses += hoy.getMonth() - fechaInicio.getMonth();
+
+if(hoy.getDate() < fechaInicio.getDate()){
+    meses--;
+}
+
+for(let i=1; i<=meses; i++){
+    let fechaFin = new Date(fechaInicio);
+    fechaFin.setMonth(fechaInicio.getMonth() + i);
+
+    let item = document.createElement("p");
+    item.innerHTML = `💕 ${i} Mes${i>1?"es":""} Juntos – 
+    ${fechaInicio.toLocaleDateString()} → 
+    ${fechaFin.toLocaleDateString()}`;
+    timeline.appendChild(item);
+}
+
+if(meses <= 0){
+    timeline.innerHTML = "Aún no cumplimos nuestro primer mes 💖";
 }
 </script>
 
