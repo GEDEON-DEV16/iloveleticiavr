@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestro Momento Eterno - Leticia ❤️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* RUTA DE LA IMAGEN EN MAIN/ROOT */
+        :root {
+            --perfil-img: url('./foto_leticia.jpg'); 
+        }
+
+        body {
+            background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+        }
+
+        #romance-background {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-message {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            font-style: italic;
+            white-space: nowrap;
+            pointer-events: none;
+            text-shadow: 0 0 10px rgba(255, 182, 193, 0.8);
+            opacity: 0;
+            animation: floatAndFade infinite linear;
+        }
+
+        @keyframes floatAndFade {
+            0% { transform: translateY(0); opacity: 0; }
+            10% { opacity: 0.7; }
+            80% { opacity: 0.7; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+
+        .whatsapp-chat-container {
+            position: relative;
+            z-index: 10;
+            height: 92vh;
+            width: 100%;
+            max-width: 420px;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* --- PANTALLA DE PERFIL --- */
+        #profile-screen {
+            position: absolute;
+            inset: 0;
+            background: #111b21;
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .profile-pic-large {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background-image: var(--perfil-img);
+            background-size: cover;
+            background-position: center;
+            margin: 40px auto;
+            border: 2px solid #00a884;
+        }
+
+        /* --- CHAT --- */
+        .whatsapp-chat {
+            background-color: rgba(11, 20, 26, 0.85);
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(8px);
+        }
+
+        .chat-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 16px;
+            scroll-behavior: smooth;
+            background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=60');
+            background-size: cover;
+            background-blend-mode: multiply;
+            background-color: rgba(11, 20, 26, 0.5);
+        }
+
+        .chat-messages::-webkit-scrollbar { width: 0px; }
+
+        .bubble {
+            max-width: 85%;
+            padding: 8px 12px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: relative;
+            opacity: 0;
+            margin-bottom: 4px;
+        }
+
+        .bubble-in { background-color: #202c33; border-radius: 0 10px 10px 10px; color: #e9edef; align-self: flex-start; }
+        .bubble-out { background-color: #005c4b; border-radius: 10px 0 10px 10px; color: #e9edef; align-self: flex-end; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .animate-message { animation: fadeInUp 0.5s ease-out forwards; }
+
+        .audio-wave {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            width: 160px;
+        }
+        .wave-bar { width: 2px; height: 12px; background: #53bdeb; border-radius: 2px; }
+
+        .icon-btn { transition: all 0.2s ease; cursor: pointer; }
+        .icon-btn:hover { transform: scale(1.1); color: #fff; }
+    </style>
+</head>
+<body>
+
+    <div id="romance-background"></div>
+
+    <div class="whatsapp-chat-container">
+        
+        <div id="profile-screen">
+            <div class="p-4 flex items-center gap-6 text-white bg-[#202c33]">
+                <i class="fas fa-arrow-left icon-btn" onclick="openChat()"></i>
+                <span class="text-lg">Info. del contacto</span>
+            </div>
+            
+            <div class="profile-pic-large"></div>
+            
+            <div class="text-center text-white mb-8">
+                <h1 class="text-2xl font-bold">♡¤mi Niña¤♡</h1>
+                <p class="text-gray-400">En línea</p>
+            </div>
+
+            <div class="bg-[#202c33] mx-4 p-4 rounded-xl shadow-lg border-l-4 border-green-500">
+                <p class="text-green-500 text-xs font-bold uppercase mb-1">Info.</p>
+                <p class="text-white text-base">primer mes juntos 26 enero al 26 febrero del 2026</p>
+                <p class="text-gray-400 text-xs mt-2">26 de febrero</p>
+            </div>
+
+            <div class="mt-auto p-6">
+                <button onclick="openChat()" class="w-full bg-[#00a884] text-white py-3 rounded-full font-bold shadow-lg hover:bg-[#00c098] transition-all">
+                    VER MENSAJES <i class="fas fa-chevron-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="whatsapp-chat">
+            <div class="bg-[#202c33] p-3 flex items-center text-white space-x-3 shrink-0 shadow-md z-10">
+                <i class="fas fa-arrow-left text-gray-400 icon-btn" onclick="showProfile()"></i>
+                <div class="w-10 h-10 rounded-full border border-gray-600 overflow-hidden" style="background-image: var(--perfil-img); background-size: cover; background-position: center;">
+                </div>
+                <div class="flex-grow">
+                    <h2 class="font-semibold text-sm">♡¤mi Niña¤♡</h2>
+                    <p class="text-[10px] text-green-400 animate-pulse">en línea</p>
+                </div>
+                <div class="flex space-x-5 text-gray-400 items-center">
+                    <i class="fas fa-video icon-btn"></i>
+                    <i class="fas fa-phone icon-btn"></i>
+                    <i class="fas fa-ellipsis-v icon-btn"></i>
+                </div>
+            </div>
+
+            <div id="chatBody" class="chat-messages flex flex-col space-y-3">
+                
+                <div class="bg-[#182229]/90 p-2 rounded-lg flex items-center space-x-2 text-[11px] text-white border-l-4 border-green-500 shadow bubble js-message">
+                    <i class="fas fa-thumbtack text-gray-400 rotate-45"></i>
+                    <span>Nuestras fechas: 26 Enero 2026, conocí a la...</span>
+                </div>
+
+                <div class="bubble bubble-in js-message">
+                    <p class="whitespace-pre-line text-[14px]">Mi niño hermoso 💕
+
+Mañana cumplimos un mes desde que empezamos a hablar y no puedo dejar de pensar en lo especial que se volvió el 26 de enero de 2026 para mí, porque ese día conocí al hombre que hoy me hace feliz 🥰✨ Nunca imaginé que una conversación se convertiría en algo tan importante en mi vida, que alguien que aún no conozco en persona pudiera tocar mi corazón de esta manera 💖
+
+Aunque todavía no nos hemos visto frente a frente, lo que siento es real. Porque el amor no empieza con la vista, empieza con el alma, con la conexión, con la forma en que alguien te hace sentir 🫶🏼💞 Y tú, mi niño, me haces sentir querida, cuidada, especial, ilusionada. Me haces sonreír sin darte cuenta, me haces esperar tus mensajes con emoción, me haces sentir algo que no quiero perder 💓
+
+Hoy que me mandaste ese detalle tan hermoso, con mis canciones favoritas y palabras tan lindas, mi corazón se llenó. Pensé que yo también quería darte algo mío, algo que saliera de lo más profundo de mí. Porque tú mereces saber cuánto significas para mí 💝
+
+Sí, aún no te conozco en persona, pero si Dios quiere algún día estaremos juntos 🙏🏼✨ Y yo sí quiero estar contigo. Quiero abrazarte, quiero mirarte a los ojos, quiero que todo lo que hemos hablado se vuelva real. No sé cuándo ni cómo, pero tengo fe en que si esto viene de Dios, Él abrirá el camino 💫
+
+Mi niño, te amo 🥹❤️ Te amo de una manera limpia, sincera y tranquila. Te amo porque me das paz. Te amo porque me haces sentir elegida. Te amo porque en este mes me has demostrado que hay hombres que saben querer bonito 💕
+
+Gracias por este primer mes. Gracias por aparecer en mi vida. Gracias por hacerme feliz incluso a la distancia 🌎💘 Yo quiero seguir construyendo contigo, paso a pasito, con paciencia, con fe y con mucho amor 🫶🏼💞
+
+Feliz primer mes, mi amor 😘💖 Que esto apenas sea el comienzo de algo mucho más grande si Dios así lo permite 🙏🏼✨</p>
+                    <div class="text-[10px] text-gray-400 text-right mt-1">11:53 pm</div>
+                </div>
+
+                <div class="bubble bubble-out js-message"><p class="text-[14px]">Voy a llorar 😭🥺❤️</p></div>
+                <div class="bubble bubble-out js-message"><p class="text-[14px]">No me atreveré a perderte ❤️😭</p></div>
+
+                <div class="bubble bubble-in js-message">
+                    <p class="text-[14px]">Sé que a veces no t demuestro mi amor, pero de verdad yo te amo 💞💞</p>
+                    <div class="text-[10px] text-gray-400 text-right mt-1">11:56 pm</div>
+                </div>
+
+                <div class="bubble bubble-out js-message"><p class="text-[14px]">Lo imprimiré y lo recordaré por siempre 💘✨</p></div>
+
+                <div class="bubble bubble-in js-message"><p class="text-[14px]">Shi shiiiii ❤️ mi niño 🥺🥺</p></div>
+                <div class="bubble bubble-out js-message"><p class="text-[14px]">Te amo niña ❤️</p></div>
+                <div class="bubble bubble-out js-message"><p class="text-[14px]">❤️🥰 te haz vuelto especial</p></div>
+                <div class="bubble bubble-out js-message"><p class="text-[14px]">Y todo pasito a pasito</p></div>
+                <div class="bubble bubble-in js-message"><p class="text-[14px]">Y yo ati mi niño de veras 🥰🥰</p></div>
+
+                <div class="bubble bubble-out js-message">
+                    <div class="audio-wave">
+                        <i class="fas fa-play text-white mr-2"></i>
+                        <div class="flex items-end gap-1 h-6">
+                            <div class="wave-bar" style="height: 10px"></div><div class="wave-bar" style="height: 18px"></div>
+                            <div class="wave-bar" style="height: 14px"></div><div class="wave-bar" style="height: 22px"></div>
+                            <div class="wave-bar" style="height: 12px"></div><div class="wave-bar" style="height: 16px"></div>
+                        </div>
+                        <span class="text-[12px] ml-2">0:12</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="bg-[#202c33] p-2 flex items-center space-x-2 shrink-0 border-t border-gray-700">
+                <div class="flex-grow bg-[#2a3942] rounded-full flex items-center px-4 py-2 space-x-3">
+                    <i class="far fa-laugh text-gray-400 text-xl icon-btn"></i>
+                    <input type="text" placeholder="Mensaje" class="bg-transparent flex-grow text-sm text-white outline-none">
+                    <i class="fas fa-camera text-gray-400 icon-btn"></i>
+                </div>
+                <div class="bg-[#00a884] w-12 h-12 rounded-full flex items-center justify-center">
+                    <i class="fas fa-microphone text-white text-lg"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openChat() {
+            document.getElementById('profile-screen').style.transform = 'translateY(-100%)';
+            startChatAnimations();
+        }
+
+        function showProfile() {
+            document.getElementById('profile-screen').style.transform = 'translateY(0)';
+        }
+
+        function startChatAnimations() {
+            const messages = document.querySelectorAll('.js-message');
+            const chatBody = document.getElementById('chatBody');
+            
+            messages.forEach((message, index) => {
+                let delay = index * 1000; 
+                setTimeout(() => {
+                    message.classList.add('animate-message');
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                }, delay);
+            });
+        }
+
+        // Script de Mensajes Románticos Infinitos
+        const romanceBg = document.getElementById('romance-background');
+        const frases = ["Te amo Leticia ❤️", "26 de Enero ✨", "Mi niña hermosa 🥰", "Juntos siempre 🫶🏼", "Primer Mes 💖"];
+
+        function crearMensajeFlotante() {
+            const span = document.createElement('span');
+            span.classList.add('floating-message');
+            span.innerText = frases[Math.floor(Math.random() * frases.length)];
+            span.style.left = Math.random() * 100 + "vw";
+            span.style.top = Math.random() * 100 + "vh";
+            span.style.animationDuration = (10 + Math.random() * 10) + "s";
+            romanceBg.appendChild(span);
+            setTimeout(() => span.remove(), 15000);
+        }
+        setInterval(crearMensajeFlotante, 800);
+    </script>
+</body>
+</html>
