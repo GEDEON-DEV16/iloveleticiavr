@@ -153,6 +153,31 @@ button:hover{
     100%{transform:translateY(-800px); opacity:0;}
 }
 
+/* 📲 WhatsApp Flotante */
+.whatsapp-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 100;
+    transition: transform 0.3s ease;
+    animation: floatAnim 3s ease-in-out infinite;
+}
+
+.whatsapp-btn:hover {
+    transform: scale(1.1);
+}
+
+.whatsapp-btn img {
+    width: 65px;
+    height: 65px;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+@keyframes floatAnim {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
 footer{
     position:absolute;
     bottom:5px;
@@ -166,6 +191,10 @@ footer{
 <body>
 
 <div class="stars"></div>
+
+<a href="whatsapp.html" class="whatsapp-btn">
+    <img src="https://img.icons8.com/?size=100&id=7OeRNqg6S7Vf&format=png&color=000000" alt="WhatsApp">
+</a>
 
 <h1>💖 Feliz 14 de Febrero 💖</h1>
 
@@ -277,4 +306,3 @@ actualizarCronologia();
 
 </body>
 </html>
-
