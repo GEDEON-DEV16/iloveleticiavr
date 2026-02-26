@@ -1,258 +1,229 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Te amo Leticia ❤️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Rockola - 1 Mes Juntos 💖</title>
+    <style>
+        :root {
+            --romance: #ff758f;
+            --love-dark: #590d22;
+            --soft-pink: #ffb3c1;
+        }
 
-<style>
-body{
-    margin:0;
-    padding:0;
-    overflow:hidden;
-    height:100vh;
-    background: radial-gradient(circle at top, #ff8fab, #ff4d6d, #c9184a);
-    font-family:'Segoe UI', cursive;
-    color:white;
-    text-align:center;
-}
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', cursive, sans-serif;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+            overflow: hidden;
+        }
 
-/* ✨ Estrellas */
-.stars{
-    position:absolute;
-    width:100%;
-    height:100%;
-    background:
-      radial-gradient(2px 2px at 20% 30%, white, transparent),
-      radial-gradient(2px 2px at 70% 60%, white, transparent),
-      radial-gradient(2px 2px at 40% 80%, white, transparent),
-      radial-gradient(2px 2px at 90% 20%, white, transparent),
-      radial-gradient(2px 2px at 10% 70%, white, transparent);
-    animation: twinkle 4s infinite alternate;
-    z-index:-1;
-}
+        /* FONTO ANIMADO DE CORAZONES */
+        .hearts-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #800f2f 0%, #0a0a0a 100%);
+        }
 
-@keyframes twinkle{
-    from{opacity:0.3;}
-    to{opacity:1;}
-}
+        .heart {
+            position: absolute;
+            color: rgba(255, 117, 143, 0.3);
+            animation: float 6s linear infinite;
+            font-size: 20px;
+        }
 
-h1{
-    margin-top:40px;
-    font-size:2.8em;
-    text-shadow:0 0 20px rgba(255,255,255,0.8);
-    animation: latido 1.5s infinite;
-}
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
 
-@keyframes latido{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.05);}
-    100%{transform:scale(1);}
-}
+        /* CONTENEDOR PRINCIPAL */
+        .main-card {
+            width: 95%;
+            max-width: 950px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 40px;
+            border: 2px solid rgba(255, 117, 143, 0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(255, 77, 109, 0.3);
+        }
 
-/* 💌 Carta */
-.envelope{
-    position:absolute;
-    width:350px;
-    background:#ffccd5;
-    padding:20px;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
-    border-radius:20px;
-    cursor:pointer;
-    box-shadow:0 0 30px rgba(255,255,255,0.6);
-    transition:0.4s;
-    animation:giro360 60s infinite;
-}
+        .header {
+            padding: 20px;
+            text-align: center;
+            background: rgba(255, 117, 143, 0.1);
+        }
 
-@keyframes giro360{
-    0%{ transform:translate(-50%, -50%) rotateY(0deg); }
-    25%{ transform:translate(-50%, -50%) rotateY(360deg); }
-    50%{ transform:translate(-50%, -50%) rotateY(360deg); }
-    75%{ transform:translate(-50%, -50%) rotateY(720deg); }
-    100%{ transform:translate(-50%, -50%) rotateY(720deg); }
-}
+        .header h1 { margin: 0; font-size: 1.5rem; color: var(--soft-pink); text-shadow: 0 0 10px var(--romance); }
 
-.envelope:hover{
-    transform:translate(-50%, -50%) scale(1.05);
-}
+        .content { display: flex; flex: 1; }
 
-.letter{
-    background:white;
-    color:#c9184a;
-    padding:20px;
-    border-radius:15px;
-    max-height:0;
-    overflow:hidden;
-    transition:max-height 0.8s ease;
-}
+        /* VIDEO */
+        .video-side { flex: 1.5; position: relative; background: #000; }
+        .video-wrapper { position: relative; padding-top: 56.25%; }
+        iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-.envelope.open .letter{
-    max-height:500px;
-}
+        /* FRASES ROMÁNTICAS */
+        #love-quote {
+            padding: 15px;
+            text-align: center;
+            font-style: italic;
+            color: var(--soft-pink);
+            background: rgba(0,0,0,0.5);
+            min-height: 20px;
+        }
 
-/* 💖 Botones */
-.buttons-container {
-    position:absolute;
-    bottom:30px;
-    left:50%;
-    transform:translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+        /* PLAYLIST */
+        .playlist-side {
+            flex: 1;
+            background: rgba(0,0,0,0.4);
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 450px;
+        }
 
-button{
-    position:relative;
-    padding:12px 30px;
-    font-size:16px;
-    border:none;
-    border-radius:40px;
-    background:white;
-    color:#c9184a;
-    cursor:pointer;
-    box-shadow:0 0 20px rgba(255,255,255,0.8);
-    transition:0.3s;
-    font-weight: bold;
-}
+        .song-card {
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid transparent;
+        }
 
-button:hover{
-    transform: scale(1.1);
-}
+        .song-card:hover { background: rgba(255, 117, 143, 0.2); }
+        .song-card.active {
+            background: var(--romance);
+            box-shadow: 0 0 20px rgba(255, 117, 143, 0.5);
+        }
 
-.btn-rockola {
-    background: #c9184a;
-    color: white;
-}
+        /* BOTONES */
+        .player-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            background: rgba(0,0,0,0.6);
+        }
 
-/* ❤️ Corazones flotantes */
-.float{
-    position:absolute;
-    animation: subir 6s linear forwards;
-    white-space:nowrap;
-    pointer-events:none;
-}
+        .btn-love {
+            background: none; border: 2px solid var(--romance); color: white;
+            width: 50px; height: 50px; border-radius: 50%; cursor: pointer;
+            transition: 0.3s; display: flex; align-items: center; justify-content: center;
+        }
 
-@keyframes subir{
-    0%{transform:translateY(0); opacity:1;}
-    100%{transform:translateY(-800px); opacity:0;}
-}
+        .btn-love:hover { background: var(--romance); transform: scale(1.1); }
+        .btn-main { width: 65px; height: 65px; background: var(--romance); font-size: 1.5rem; }
 
-/* 📦 Timeline desbloqueable */
-.timeline-box{
-    position:absolute;
-    bottom:140px;
-    left:50%;
-    transform:translateX(-50%);
-    width:80%;
-    max-width:600px;
-    background:rgba(255,255,255,0.15);
-    backdrop-filter:blur(8px);
-    border-radius:20px;
-    padding:20px;
-    box-shadow:0 0 25px rgba(255,255,255,0.4);
-    max-height:150px;
-    overflow-y:auto;
-}
-
-.timeline-box h3{
-    margin-top:0;
-}
-
-footer{
-    position:absolute;
-    bottom:5px;
-    width:100%;
-    font-size:0.8em;
-    opacity:0.8;
-}
-</style>
+        @media (max-width: 768px) {
+            .content { flex-direction: column; }
+            .main-card { height: auto; margin: 10px; }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="stars"></div>
+<div class="hearts-bg" id="hearts-container"></div>
 
-<h1>💖 Feliz 14 de Febrero 💖</h1>
+<div class="main-card">
+    <div class="header">
+        <h1>Feliz 1er Mes, Mi Amor 💖 Nuestra Rockola</h1>
+    </div>
 
-<div class="envelope" onclick="abrirCarta(this)">
-    <div class="letter">
-        <h3>Para Leticia 💕</h3>
-        <p>
-        Desde que llegaste a mi vida, todo es más bonito.<br><br>
-        Tus mensajes iluminan mis días ✨<br>
-        Tu sonrisa acelera mi corazón 💓<br>
-        Y tu existencia es mi regalo favorito 🎁<br><br>
-        Hoy celebro el amor…  
-        pero sobre todo celebro que seas tú ❤️
-        </p>
+    <div class="content">
+        <div class="video-side">
+            <div class="video-wrapper">
+                <iframe id="videoPlayer" src="https://www.youtube-nocookie.com/embed/dmk38LOfLbI?controls=0&rel=0&enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <div id="love-quote">Eres lo mejor que me pasó este mes... ✨</div>
+            
+            <div class="player-controls">
+                <button class="btn-love" onclick="changeSong(-1)">⏮</button>
+                <button class="btn-love btn-main" onclick="playCurrent()">▶</button>
+                <button class="btn-love" onclick="changeSong(1)">⏭</button>
+            </div>
+        </div>
+
+        <div class="playlist-side" id="playlist">
+            <div class="song-card active" data-id="dmk38LOfLbI">✨ Sé que volveré a verte</div>
+            <div class="song-card" data-id="88uUoX1FDgg">✨ Tu forma de ser</div>
+            <div class="song-card" data-id="zcTxsJrzZoM">✨ Todo me recuerda a ti</div>
+            <div class="song-card" data-id="0OgCetGFg0Q">✨ Te conquistaré</div>
+            <div class="song-card" data-id="VjkyLTrkxhc">✨ Siempre pensando en ti</div>
+            <div class="song-card" data-id="U9zWgk80dQI">✨ Prometo amarte</div>
+            <div class="song-card" data-id="YN6KOSwwkfg">✨ Alma de robot</div>
+            <div class="song-card" data-id="jr75Nk0XmCQ">✨ Millonario de amor</div>
+            <div class="song-card" data-id="cdX0yZEump8">✨ La nueva marca</div>
+        </div>
     </div>
 </div>
 
-<div class="timeline-box">
-    <h3>📅 Nuestro Tiempo Juntos</h3>
-    <div id="timeline"></div>
-</div>
-
-<div class="buttons-container">
-    <button onclick="efectoAmor()">Te amo Leticia :)</button>
-    <button class="btn-rockola" onclick="irARockola()">🎵 Nuestra rockola de amor</button>
-</div>
-
-<footer>
-Hecho con amor infinito 💘
-</footer>
-
 <script>
-function abrirCarta(el){
-    el.classList.toggle("open");
-}
+    const player = document.getElementById('videoPlayer');
+    const songs = document.querySelectorAll('.song-card');
+    const quoteBox = document.getElementById('love-quote');
+    let current = 0;
 
-function efectoAmor(){
-    for(let i=0;i<20;i++){
-        let heart=document.createElement("div");
-        heart.classList.add("float");
-        heart.innerHTML="❤️";
-        heart.style.left=Math.random()*100+"vw";
-        heart.style.top="80vh";
-        heart.style.fontSize=(Math.random()*25+20)+"px";
-        document.body.appendChild(heart);
-        setTimeout(()=>heart.remove(),6000);
+    const quotes = [
+        "Este es solo el primer mes de muchos... 🌹",
+        "Cada canción me recuerda a una sonrisa tuya. 😊",
+        "Gracias por este mes tan increíble a tu lado. ❤️",
+        "Tú eres mi melodía favorita. 🎶",
+        "Un mes juntos y ya siento que te conozco de siempre. ✨",
+        "Eres el mejor regalo que me dio la vida. 🎁",
+        "Me encantas cada día un poquito más. 😍",
+        "Por un millón de meses más contigo. 🥂",
+        "Nuestra historia apenas comienza... 📖"
+    ];
+
+    function updatePlayer(autoplay = true) {
+        const id = songs[current].dataset.id;
+        const auto = autoplay ? 1 : 0;
+        const origin = window.location.origin;
+        
+        player.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=${auto}&controls=0&rel=0&enablejsapi=1&origin=${origin}`;
+        
+        songs.forEach((s, i) => s.classList.toggle('active', i === current));
+        quoteBox.textContent = quotes[current % quotes.length];
+        songs[current].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
-}
 
-function irARockola() {
-    window.location.href = "rockola.html";
-}
+    function playCurrent() { updatePlayer(true); }
+    function changeSong(dir) {
+        current = (current + dir + songs.length) % songs.length;
+        updatePlayer(true);
+    }
 
-/* 🔥 DESBLOQUEO AUTOMÁTICO POR MESES */
-const fechaInicio = new Date("2026-01-26"); 
-const hoy = new Date();
-const timeline = document.getElementById("timeline");
+    songs.forEach((song, i) => {
+        song.onclick = () => { current = i; updatePlayer(true); };
+    });
 
-let meses = (hoy.getFullYear() - fechaInicio.getFullYear()) * 12;
-meses += hoy.getMonth() - fechaInicio.getMonth();
+    // Generar corazones flotantes
+    function createHeart() {
+        const container = document.getElementById('hearts-container');
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '❤️';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        container.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 500);
 
-if(hoy.getDate() < fechaInicio.getDate()){
-    meses--;
-}
-
-for(let i=1; i<=meses; i++){
-    let fechaFin = new Date(fechaInicio);
-    fechaFin.setMonth(fechaInicio.getMonth() + i);
-
-    let item = document.createElement("p");
-    item.innerHTML = `💕 ${i} Mes${i>1?"es":""} Juntos – 
-    ${fechaInicio.toLocaleDateString()} → 
-    ${fechaFin.toLocaleDateString()}`;
-    timeline.appendChild(item);
-}
-
-if(meses <= 0){
-    timeline.innerHTML = "Aún no cumplimos nuestro primer mes 💖";
-}
 </script>
-
 </body>
 </html>
