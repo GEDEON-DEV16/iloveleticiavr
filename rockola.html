@@ -23,7 +23,7 @@
             overflow: hidden;
         }
 
-        /* FONTO ANIMADO DE CORAZONES */
+        /* FONDO ANIMADO DE CORAZONES */
         .hearts-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -146,13 +146,17 @@
     <div class="content">
         <div class="video-side">
             <div class="video-wrapper">
-                <iframe id="videoPlayer" src="https://www.youtube-nocookie.com/embed/dmk38LOfLbI?controls=0&rel=0&enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <iframe id="videoPlayer" 
+                    src="https://www.youtube-nocookie.com/embed/dmk38LOfLbI?autoplay=1&controls=0&rel=0&enablejsapi=1" 
+                    allow="autoplay; encrypted-media" 
+                    allowfullscreen>
+                </iframe>
             </div>
             <div id="love-quote">Eres lo mejor que me pasó este mes... ✨</div>
             
             <div class="player-controls">
                 <button class="btn-love" onclick="changeSong(-1)">⏮</button>
-                <button class="btn-love btn-main" onclick="playCurrent()">▶</button>
+                <button id="playPauseBtn" class="btn-love btn-main" onclick="togglePlay()">⏸</button>
                 <button class="btn-love" onclick="changeSong(1)">⏭</button>
             </div>
         </div>
@@ -175,7 +179,9 @@
     const player = document.getElementById('videoPlayer');
     const songs = document.querySelectorAll('.song-card');
     const quoteBox = document.getElementById('love-quote');
+    const playPauseBtn = document.getElementById('playPauseBtn');
     let current = 0;
+    let isPaused = false;
 
     const quotes = [
         "Este es solo el primer mes de muchos... 🌹",
@@ -189,6 +195,19 @@
         "Nuestra historia apenas comienza... 📖"
     ];
 
+    // Función para pausar/reproducir enviando comandos al iframe
+    function togglePlay() {
+        if (!isPaused) {
+            player.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+            playPauseBtn.innerHTML = "▶";
+            isPaused = true;
+        } else {
+            player.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            playPauseBtn.innerHTML = "⏸";
+            isPaused = false;
+        }
+    }
+
     function updatePlayer(autoplay = true) {
         const id = songs[current].dataset.id;
         const auto = autoplay ? 1 : 0;
@@ -196,12 +215,15 @@
         
         player.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=${auto}&controls=0&rel=0&enablejsapi=1&origin=${origin}`;
         
+        // Al cambiar de canción, reseteamos el botón a PAUSE
+        playPauseBtn.innerHTML = "⏸";
+        isPaused = false;
+
         songs.forEach((s, i) => s.classList.toggle('active', i === current));
         quoteBox.textContent = quotes[current % quotes.length];
         songs[current].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    function playCurrent() { updatePlayer(true); }
     function changeSong(dir) {
         current = (current + dir + songs.length) % songs.length;
         updatePlayer(true);
@@ -211,7 +233,6 @@
         song.onclick = () => { current = i; updatePlayer(true); };
     });
 
-    // Generar corazones flotantes
     function createHeart() {
         const container = document.getElementById('hearts-container');
         const heart = document.createElement('div');
@@ -223,7 +244,6 @@
         setTimeout(() => heart.remove(), 6000);
     }
     setInterval(createHeart, 500);
-
 </script>
 </body>
 </html>
