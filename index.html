@@ -203,16 +203,10 @@ function abrirCarta(el){
 }
 
 const mensajes = [
-"Mi niña hermosa 💕",
-"Eres mi persona favorita 🥰",
-"Mi casualidad perfecta ✨",
-"Contigo todo es mágico 💖",
-"Mi paz ❤️",
-"Siempre tú 💘",
-"Mi sonrisa eterna 😍",
-"Eres mi sueño hecho realidad 🌹",
-"Mi todo 💞",
-"Te elegiría mil veces 💫"
+    "Mi niña hermosa 💕", "Eres mi persona favorita 🥰", 
+    "Mi casualidad perfecta ✨", "Contigo todo es mágico 💖", 
+    "Mi paz ❤️", "Siempre tú 💘", "Mi sonrisa eterna 😍", 
+    "Eres mi sueño hecho realidad 🌹", "Mi todo 💞", "Te elegiría mil veces 💫"
 ];
 
 function efectoAmor(){
@@ -238,42 +232,49 @@ function efectoAmor(){
     }
 }
 
-/* 🔥 SCRIPT DE FECHAS AUTOMÁTICO */
-const fechaInicio = new Date("2026-01-26");
-const hoy = new Date();
-const lista = document.getElementById("fechas-lista");
+/* 🔥 SCRIPT DE FECHAS CORREGIDO */
+function actualizarCronologia() {
+    const fechaInicio = new Date(2026, 0, 26); // 26 de Enero (Mes 0 en JS)
+    const hoy = new Date();
+    const lista = document.getElementById("fechas-lista");
+    lista.innerHTML = ""; // Limpiar antes de llenar
 
-// Calculamos la diferencia de meses
-let mesesTranscurridos = (hoy.getFullYear() - fechaInicio.getFullYear()) * 12;
-mesesTranscurridos += hoy.getMonth() - fechaInicio.getMonth();
+    let mesesTranscurridos = (hoy.getFullYear() - fechaInicio.getFullYear()) * 12;
+    mesesTranscurridos += hoy.getMonth() - fechaInicio.getMonth();
 
-// Si aún no es 26 del mes actual, restamos uno
-if (hoy.getDate() < fechaInicio.getDate()) {
-    mesesTranscurridos--;
-}
+    // LÓGICA ESTRICTA: Si hoy es 25 y el cumple es 26, todavía NO ha pasado el mes.
+    if (hoy.getDate() < fechaInicio.getDate()) {
+        mesesTranscurridos--;
+    }
 
-// Generamos la lista de hitos cumplidos
-if (mesesTranscurridos <= 0) {
-    lista.innerHTML = "<p>✨ Viviendo nuestro primer mes ✨</p>";
-} else {
-    for (let i = 1; i <= mesesTranscurridos; i++) {
-        let fechaHito = new Date(fechaInicio);
-        fechaHito.setMonth(fechaInicio.getMonth() + i);
-        
-        let texto = "";
-        if (i % 12 === 0) {
-            texto = `🎉 ${i/12} Año(s) Juntos - ${fechaHito.toLocaleDateString()}`;
-        } else {
-            texto = `💕 ${i} Mes(es) Juntos - ${fechaHito.toLocaleDateString()}`;
+    if (mesesTranscurridos <= 0) {
+        // MAÑANA esto cambiará automáticamente a "1 mes"
+        lista.innerHTML = "<p>✨ Viviendo nuestro primer mes ✨</p><p style='font-size:0.8em; opacity:0.7'>(Mañana cumplimos nuestro 1er mes 💖)</p>";
+    } else {
+        for (let i = 1; i <= mesesTranscurridos; i++) {
+            let fechaHito = new Date(2026, 0, 26);
+            fechaHito.setMonth(fechaHito.getMonth() + i);
+            
+            let texto = "";
+            let opciones = { day: 'numeric', month: 'long', year: 'numeric' };
+            
+            if (i % 12 === 0) {
+                texto = `🎉 ${i/12} Año(s) Juntos - ${fechaHito.toLocaleDateString('es-ES', opciones)}`;
+            } else {
+                texto = `💕 ${i} Mes(es) Juntos - ${fechaHito.toLocaleDateString('es-ES', opciones)}`;
+            }
+            
+            let p = document.createElement("p");
+            p.style.margin = "5px 0";
+            p.innerHTML = "✅ " + texto;
+            lista.appendChild(p);
         }
-        
-        let p = document.createElement("p");
-        p.style.margin = "5px 0";
-        p.innerHTML = texto;
-        lista.appendChild(p);
     }
 }
+
+actualizarCronologia();
 </script>
 
 </body>
 </html>
+
