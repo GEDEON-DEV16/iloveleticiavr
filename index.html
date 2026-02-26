@@ -17,7 +17,7 @@ body{
     text-align:center;
 }
 
-/* ✨ Estrellas */
+/* ✨ Estrellas románticas */
 .stars{
     position:absolute;
     width:100%;
@@ -38,8 +38,8 @@ body{
 }
 
 h1{
-    margin-top:20px;
-    font-size:2.2em;
+    margin-top:40px;
+    font-size:2.8em;
     text-shadow:0 0 20px rgba(255,255,255,0.8);
     animation: latido 1.5s infinite;
 }
@@ -53,21 +53,21 @@ h1{
 /* 💌 Carta */
 .envelope{
     position:absolute;
-    width:300px;
+    width:350px;
     background:#ffccd5;
     padding:20px;
-    top:38%; /* Subido un poco para dar aire a los botones */
+    top:45%;
     left:50%;
     transform:translate(-50%, -50%);
     border-radius:20px;
     cursor:pointer;
     box-shadow:0 0 30px rgba(255,255,255,0.6);
     transition:0.4s;
-    z-index: 5;
+    z-index: 10;
 }
 
-.envelope.open .letter{
-    max-height:500px;
+.envelope:hover{
+    transform:translate(-50%, -50%) scale(1.05);
 }
 
 .letter{
@@ -80,52 +80,58 @@ h1{
     transition:max-height 0.8s ease;
 }
 
-/* 📦 Timeline */
-.timeline-box{
-    position:absolute;
-    bottom:170px; /* Separado de los botones */
-    left:50%;
-    transform:translateX(-50%);
-    width:85%;
-    max-width:450px;
-    background:rgba(255,255,255,0.15);
-    backdrop-filter:blur(8px);
-    border-radius:20px;
-    padding:10px;
-    z-index: 2;
+.envelope.open .letter{
+    max-height:500px;
 }
 
-/* 💖 CONTENEDOR DE BOTONES (Corregido para GitHub Pages) */
-.buttons-container {
+/* 📅 Timeline (Fechas automáticas) */
+.timeline-box {
     position: absolute;
-    bottom: 35px;
+    bottom: 145px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    padding: 10px;
+    max-height: 100px;
+    overflow-y: auto;
+    font-size: 0.85em;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 💖 Botones Inferiores */
+.btn-container {
+    position: absolute;
+    bottom: 25px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     width: 100%;
     align-items: center;
-    z-index: 100; /* Prioridad máxima */
 }
 
 button{
-    padding:12px 20px;
+    position: relative; /* Cambiado de absolute para el contenedor flex */
+    padding:12px 30px;
     font-size:16px;
     border:none;
     border-radius:40px;
     background:white;
     color:#c9184a;
     cursor:pointer;
-    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+    box-shadow:0 0 20px rgba(255,255,255,0.5);
     transition:0.3s;
     font-weight: bold;
-    width: 260px;
+    width: 280px;
 }
 
 button:hover{
     transform: scale(1.05);
-    background: #fff;
 }
 
 .btn-rockola {
@@ -134,13 +140,12 @@ button:hover{
     border: 2px solid white;
 }
 
-/* ❤️ Corazones flotantes */
+/* ❤️ Corazones y mensajes */
 .float{
     position:absolute;
     animation: subir 6s linear forwards;
     white-space:nowrap;
     pointer-events:none;
-    z-index: 1;
 }
 
 @keyframes subir{
@@ -152,7 +157,7 @@ footer{
     position:absolute;
     bottom:5px;
     width:100%;
-    font-size:0.7em;
+    font-size:0.8em;
     opacity:0.8;
 }
 </style>
@@ -162,7 +167,7 @@ footer{
 
 <div class="stars"></div>
 
-<h1>💖 Feliz 1er Mes, Leticia 💖</h1>
+<h1>💖 Feliz 14 de Febrero 💖</h1>
 
 <div class="envelope" onclick="abrirCarta(this)">
     <div class="letter">
@@ -171,23 +176,25 @@ footer{
         Desde que llegaste a mi vida, todo es más bonito.<br><br>
         Tus mensajes iluminan mis días ✨<br>
         Tu sonrisa acelera mi corazón 💓<br>
-        Y tu existencia es mi regalo favorito 🎁<br><br>
-        Hoy celebro nuestro primer mes...  
+        Y tu existence es mi regalo favorito 🎁<br><br>
+        Hoy celebro el amor…  
         pero sobre todo celebro que seas tú ❤️
         </p>
     </div>
 </div>
 
 <div class="timeline-box" id="timeline">
-    </div>
+    <h3>📅 Nuestra Historia</h3>
+    <div id="fechas-lista"></div>
+</div>
 
-<div class="buttons-container">
+<div class="btn-container">
     <button onclick="efectoAmor()">Te amo Leticia :)</button>
-    <button class="btn-rockola" onclick="irARockola()">🎵 Nuestra rockola de amor</button>
+    <button class="btn-rockola" onclick="window.location.href='rockola.html'">🎵 Nuestra rockola de amor</button>
 </div>
 
 <footer>
-Hecho con amor infinito 💘
+Hecho con amor infinito 💘 | 14 de Febrero
 </footer>
 
 <script>
@@ -195,36 +202,76 @@ function abrirCarta(el){
     el.classList.toggle("open");
 }
 
+const mensajes = [
+"Mi niña hermosa 💕",
+"Eres mi persona favorita 🥰",
+"Mi casualidad perfecta ✨",
+"Contigo todo es mágico 💖",
+"Mi paz ❤️",
+"Siempre tú 💘",
+"Mi sonrisa eterna 😍",
+"Eres mi sueño hecho realidad 🌹",
+"Mi todo 💞",
+"Te elegiría mil veces 💫"
+];
+
 function efectoAmor(){
-    for(let i=0;i<20;i++){
+    for(let i=0;i<30;i++){
         let heart=document.createElement("div");
         heart.classList.add("float");
         heart.innerHTML="❤️";
         heart.style.left=Math.random()*100+"vw";
-        heart.style.top="85vh";
+        heart.style.top="80vh";
         heart.style.fontSize=(Math.random()*25+20)+"px";
         document.body.appendChild(heart);
         setTimeout(()=>heart.remove(),6000);
+
+        let msg=document.createElement("div");
+        msg.classList.add("float");
+        msg.innerHTML=mensajes[Math.floor(Math.random()*mensajes.length)];
+        msg.style.left=Math.random()*100+"vw";
+        msg.style.top=(Math.random()*80+10)+"vh";
+        msg.style.fontSize="18px";
+        msg.style.color="#ffe5ec";
+        document.body.appendChild(msg);
+        setTimeout(()=>msg.remove(),6000);
     }
 }
 
-// Como está en la raíz, el link es directo
-function irARockola() {
-    window.location.href = "rockola.html";
+/* 🔥 SCRIPT DE FECHAS AUTOMÁTICO */
+const fechaInicio = new Date("2026-01-26");
+const hoy = new Date();
+const lista = document.getElementById("fechas-lista");
+
+// Calculamos la diferencia de meses
+let mesesTranscurridos = (hoy.getFullYear() - fechaInicio.getFullYear()) * 12;
+mesesTranscurridos += hoy.getMonth() - fechaInicio.getMonth();
+
+// Si aún no es 26 del mes actual, restamos uno
+if (hoy.getDate() < fechaInicio.getDate()) {
+    mesesTranscurridos--;
 }
 
-const fechaInicio = new Date("2026-01-26"); 
-const hoy = new Date();
-const timeline = document.getElementById("timeline");
-
-let meses = (hoy.getFullYear() - fechaInicio.getFullYear()) * 12;
-meses += hoy.getMonth() - fechaInicio.getMonth();
-if(hoy.getDate() < fechaInicio.getDate()) meses--;
-
-if(meses <= 0){
-    timeline.innerHTML = "Aún no cumplimos nuestro primer mes 💖";
+// Generamos la lista de hitos cumplidos
+if (mesesTranscurridos <= 0) {
+    lista.innerHTML = "<p>✨ Viviendo nuestro primer mes ✨</p>";
 } else {
-    timeline.innerHTML = `💕 Ya son ${meses} Mes${meses>1?"es":""} Juntos 💕`;
+    for (let i = 1; i <= mesesTranscurridos; i++) {
+        let fechaHito = new Date(fechaInicio);
+        fechaHito.setMonth(fechaInicio.getMonth() + i);
+        
+        let texto = "";
+        if (i % 12 === 0) {
+            texto = `🎉 ${i/12} Año(s) Juntos - ${fechaHito.toLocaleDateString()}`;
+        } else {
+            texto = `💕 ${i} Mes(es) Juntos - ${fechaHito.toLocaleDateString()}`;
+        }
+        
+        let p = document.createElement("p");
+        p.style.margin = "5px 0";
+        p.innerHTML = texto;
+        lista.appendChild(p);
+    }
 }
 </script>
 
